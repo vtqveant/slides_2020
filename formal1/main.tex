@@ -1,0 +1,480 @@
+\documentclass{beamer}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb,amsfonts,amsmath,mathtext}
+\usepackage{cite,enumerate,float,indentfirst}
+
+\usepackage{tikz-qtree}        % regular trees (e.g. GB style)
+\usepackage{tikz-dependency}   % dependency trees (bracket style)
+\usepackage{gb4e}              % numbered lists for linguistic examples
+
+\graphicspath{{images/}}
+
+\usetheme{Rochester}
+\usecolortheme{seagull}
+
+\setbeamertemplate{footline}{\scriptsize{\hspace*{0.4cm}\insertframenumber}\vspace*{0.3cm}}
+\beamertemplatenavigationsymbolsempty
+
+\errorcontextlines 10000
+
+\begin{document}
+
+\title{\large{\sc Формальный синтаксис}}
+\author{Константин Соколов}
+%\institute[]{СПбГПУ}
+%\date{Санкт-Петербург, 2015} 
+
+\begin{frame}
+    \thispagestyle{empty}
+    \titlepage
+\end{frame}
+
+\begin{frame}{}
+\begin{itemize}
+	\item Не путать модель (например, X'--теория) и аппарат моделирования (КГ--грамматики)
+	\item https://www.mccme.ru/free-books/pentus/pentus.pdf
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{}
+\begin{center}
+	\textbf{Модели синтаксиса}
+\end{center}
+\end{frame}
+
+\begin{frame}{Общая классификация}
+\begin{itemize}
+    \item грамматики зависимостей и грамматики составляющих
+    \item регулярные, контекстно-свободные, контекстно-зависимые
+    \item грамматики типа 3, 2, 1, 0 
+    \item трансформационные и нетрансформационные 
+    \item лексикализованные и нелексикализованные 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+\begin{center}
+	\textbf{Грамматика зависимостей}
+\end{center}
+\end{frame}
+
+% модель предложена Л. Теньером в книге "Основы структурного синтаксиса"
+\begin{frame}{Структуры зависимостей -- I}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      A \& hearing \& is \& scheduled \& on \& the \& issue \& today \& . \\
+   \end{deptext}
+   \deproot{3}{ROOT}
+   \depedge{2}{1}{ATT}
+   \depedge[edge start x offset=-6pt]{2}{5}{ATT}
+   \depedge{3}{2}{SBJ}
+   \depedge{3}{9}{PU}
+   \depedge{3}{4}{VC}
+   \depedge{4}{8}{TMP}
+   \depedge{5}{7}{PC}
+   \depedge[arc angle=50]{7}{6}{ATT}
+\end{dependency}
+\end{frame}
+
+\begin{frame}{Структуры зависимостей -- II}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      Сегодня \& мы \& начинаем \& заниматься \& математикой. \\
+   \end{deptext}
+   \depedge{3}{1}{}
+   \depedge{3}{2}{}
+   \depedge[edge start x offset=-8pt]{3}{4}{}
+   \depedge[edge start x offset=-2pt]{4}{5}{}
+\end{dependency}
+
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      Мы \& сегодня \& начинаем \& заниматься \& математикой. \\
+   \end{deptext}
+   \depedge{3}{1}{}
+   \depedge{3}{2}{}
+   \depedge[edge start x offset=-8pt]{3}{4}{}
+   \depedge[edge start x offset=-2pt]{4}{5}{}
+\end{dependency}
+\end{frame}
+
+\begin{frame}{Структуры зависимостей -- III}
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      X \& Y \& Z \\
+   \end{deptext}
+   \depedge[edge start x offset=-5pt]{1}{2}{}
+   \depedge[edge start x offset=-3pt]{2}{3}{}
+\end{dependency}
+\end{center}
+\medskip
+\begin{itemize}
+    \item $X$ подчиняет $Y$, $Y$ зависит от $X$
+    \item $X$ -- вершина, хозяин, ядро, главное слово
+    \item $Y$ -- зависимое слово, слуга
+    \item $Y$ непосредственно зависит от $X$, $Z$ -- опосредованно
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Структуры зависимостей -- IV}
+Структура зависимостей большинства предложений естетвенного языка -- дерево\\
+\medskip
+\begin{itemize}
+    \item принцип единственности корневого узла
+    \item принцип единственности вершины
+    \item принцип запрета на контур (цикл)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Синтаксическая валентность словоформы}
+\begin{itemize}
+    \item активная -- способность присоединять зависимые
+    \item пассивная -- способность выступать зависимым или корневым узлом
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Критерии выделения вершины -- I}
+Критерий Базелла (эндоцентричности):\\
+\medskip
+{\small \textit{В предложении словоформа $W_1$ зависит от словоформы $W_2$, если пассивная валентность пары $W_1 + W_2$ в основном сопадает с пассивной валентностью $W_2$.}}
+
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textbf{очень} \& \textbf{высокая} \& гора \\
+   \end{deptext}
+   \depedge{2}{1}{}
+   \depedge{3}{2}{}
+\end{dependency}
+\\
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      высокая \& гора \\
+   \end{deptext}
+   \depedge{2}{1}{}
+\end{dependency}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      очень \& гора \\
+   \end{deptext}
+   \depedge{2}{1}{?}
+\end{dependency}
+\end{center}
+\end{frame}
+
+\begin{frame}{Критерии выделения вершины -- II}
+Критерий морфосинтаксического локуса:\\
+\medskip
+{\small \textit{Один из членов группы выступает в качестве представителя группы во внешних связях (локальной вершины группы) и подчиняет остальные члены группы.}}
+
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textbf{учитель} \& \textbf{сестры} \& пришел \\
+   \end{deptext}
+   \depedge{1}{2}{}
+   \depedge{3}{1}{}
+\end{dependency}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      *\textbf{учитель} \& \textbf{сестры} \& пришла \\
+   \end{deptext}
+   \depedge{2}{1}{?}
+   \depedge{3}{2}{?}
+\end{dependency}
+\end{center}
+\end{frame}
+
+\begin{frame}{Корневая вершина -- I}
+Где вершина в паре ``подлежащее -- сказуемое''?\\
+\smallskip
+\begin{itemize}
+    \item сказуемое управляет падежом подлежащего
+    \item сказуемое согласуется с подлежащим
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Корневая вершина -- II}
+Критерий эндоцентричности: вершина -- сказуемое\\
+\smallskip
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      что \& работает \\
+   \end{deptext}
+   \depedge{1}{2}{}
+\end{dependency}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      что \& Иван \& работает \\
+   \end{deptext}
+   \depedge{1}{3}{}
+   \depedge{3}{2}{}
+\end{dependency}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      что \& Иван  \\
+   \end{deptext}
+   \depedge{1}{2}{?}
+\end{dependency}
+\end{center}
+\end{frame}
+
+\begin{frame}{Корневая вершина -- III}
+Критерий морфосинтаксического локуса: вершина -- сказуемое\\
+\smallskip
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      I \& knew \& that \& \textbf{he} \& \textbf{was} \& your \& friend \\
+   \end{deptext}
+   \depedge{2}{3}{}
+   \depedge{3}{5}{}
+   \depedge{5}{4}{}
+\end{dependency}
+\\
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      *I \& knew \& that \& \textbf{he} \& \textbf{is} \& your \& friend \\
+   \end{deptext}
+   \depedge{2}{3}{}
+   \depedge{3}{4}{?}
+   \depedge{4}{5}{?}
+\end{dependency}
+\end{center}
+\end{frame}
+
+\begin{frame}{Виды синтаксических отношений (СинТагРус) -- I}
+Cинтаксические отношения подразделяются на четыре группы:\\
+\medskip
+\begin{itemize}
+    \item актантные 
+    \item атрибутивные
+    \item сочинительные
+    \item служебные
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Виды синтаксических отношений (СинТагРус) -- II}
+Актантные СинтО (пример):\\
+\medskip
+\begin{footnotesize}
+\begin{itemize}
+    \item \textit{предикативное}: сказуемое [X] $\to$ подлежащее [Y]
+        \begin{itemize}
+            \item[] \textit{Москва$_Y$ — столица$_X$ России}
+            \item[] \textit{Петя$_Y$ какой-то странный$_X$}
+            \item[] \textit{Иван$_Y$ все еще там$_X$}
+            \item[] \textit{Сахару$_Y$ хватит$_X$ на всех}
+            \item[] \textit{Любопытно$_X$, куда он пошел$_Y$}
+        \end{itemize}
+    \item \textit{дательно-субъектное}: состояние [X] $\to$ сущ., д.п. [Y]
+        \begin{itemize}
+            \item[] \textit{Мне$_Y$ можно$_X$ уйти?}
+        \end{itemize}         
+    \item \textit{\{1,2,3,4,5\}-комплетивное}: 1-ое комплетивное СинтО связывает слово с его вторым актантом и т.д.
+        \begin{itemize}
+            \item[] \textit{Фермер арендовал$_X$ гектар$_{Y_1}$ земли у$_{Y_2}$ совхоза за$_{Y_3}$ 50000 руб. на$_{Y_4}$ пять лет}
+        \end{itemize}         
+\end{itemize}
+\end{footnotesize}
+\end{frame}
+
+\begin{frame}{Синтаксическая омонимия}
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      отзыв \& оппонента \& Петрова \\
+   \end{deptext}
+   \depedge{1}{2}{посессивное}
+   \depedge{2}{3}{посессивное}
+\end{dependency}
+\\
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      отзыв \& оппонента \& Петрова \\
+   \end{deptext}
+   \depedge{1}{2}{посессивное}
+   \depedge{2}{3}{аппозитивное}
+\end{dependency}
+\end{center}
+\end{frame}
+
+\begin{frame}{Семантическая валентность лексемы -- I}
+\textbf{Семантической валентностью (партиципантом)} лексемы $L$ называется любая переменная $X$, входящая в \textit{толкование} $L$.\\ \medskip
+Лексема, имеющая один или несколько партиципантов, называется \textbf{предикатным словом (предикатом)}.\\ \medskip
+Семантические \textbf{актанты} -- выражения, заполняющие валентности $L$ в предложении.
+\end{frame}
+
+\begin{frame}{Семантическая валентность лексемы -- II}
+Принцип Кинэна:\\
+\medskip
+{\small \textit{Контролёр согласования является партиципантом мишени. \\Мишень управления является партиципантом контролёра.}}
+
+\begin{center}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em, row sep=1ex]
+      большой-ИМ.П. \& дом-ИМ.П. \\
+      \textit{pred} \& \textit{arg} \\
+   \end{deptext}
+   \depedge{2}{1}{}
+\end{dependency}
+\\
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em, row sep=1ex]
+      вижу \& дом-ВИН.П. \\
+      \textit{pred} \& \textit{arg} \\
+   \end{deptext}
+   \depedge{1}{2}{}
+\end{dependency}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Stanford Dependency Parser}
+\smallskip
+{\small \texttt{Bell, a company which is based in LA, makes and distributes computer products.}}
+\medskip
+\begin{footnotesize}
+\begin{verbatim}
+nsubj(makes-11, Bell-1)
+det(company-4, a-3)
+appos(Bell-1, company-4)
+nsubjpass(based-7, which-5)
+auxpass(based-7, is-6)
+rcmod(company-4, based-7)
+prep(based-7, in-8)
+pobj(in-8, LA-9)
+root(ROOT-0, makes-11)
+cc(makes-11, and-12)
+conj(makes-11, distributes-13)
+nn(products-15, computer-14)
+dobj(makes-11, products-15)
+\end{verbatim}
+\end{footnotesize}
+\end{frame}
+
+\begin{frame}[fragile]{Link Grammar -- I}
+\begin{scriptsize}
+\begin{verbatim}
+linkparser> If I can make it there, I'll make it anywhere.
+Found 5 linkages (5 had no P.P. violations)
+	Linkage 1, cost vector = (UNUSED=0 DIS=0 LEN=32)
+
+    +--------------------------------Xp-------------------------------+
+    +-------------------Wd------------------+                         |
+    |      +--------------CO*s--------------+                         |
+    |      +--------------Xc-------------+  |                         |
+    |      |              +---MVp---+    |  |         +----MVp---+    |
+    |      +Cs+Sp*i+---I--+-Os-+    |    |  +Sp*+--I--+-Os-+     |    |
+    |      |  |    |      |    |    |    |  |   |     |    |     |    |
+LEFT-WALL if I.p can.v make.v it there.r , I.p 'll make.v it anywhere . 
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+\begin{frame}[fragile]{Link Grammar -- II}
+\begin{scriptsize}
+\begin{verbatim}
+linkparser> Пусть расцветают сто цветов.                           
+Found 22 linkages (12 had no P.P. violations)
+	Linkage 1, cost vector = (UNUSED=0 DIS=1 LEN=15)
+
+    +---------------------------Xp---------------------------+
+    +-----------Wd-----------+                               |
+    |        +-------EI------+-----SIp3----+----Ngp---+      |
+    |        |               |             |          |      |
+LEFT-WALL пусть.p   расцветают.vnndn3p  сто.ci  цветов.ndmpg . 
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+\begin{frame}[fragile]{Link Grammar -- III}
+\begin{scriptsize}
+\begin{verbatim}
+%
+% Stems (roots)
+%
+% Total number of stems = 135775
+% Number of stem connectors = 2997
+% Number of stem classes = 6955
+%
+-голос.= -палатн.= :
+  LLDLU+ or LLDLO+;
+
+-зах.= -пл.= -полупери.= -пров.= :
+  LLFLZ+;
+
+-звенн.= -колонн.= -перстн.= -светн.= -цветн.= -шерстн.= :
+  LLDLO+ or LLFUN+;
+
+-кратн.= :
+  LLDLO+ or LLDLU+;
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+\begin{frame}{}
+\begin{center}
+	\textbf{Грамматика непосредственных составляющих}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Грамматика составляющих -- I}
+\begin{tiny}
+\begin{center}
+\Tree [.NP [.Adj золотые ] [.N пряди ] [.NP [.AP [.Adj склоняющейся ] [.PP [.Prep за ] [.NP [.Adj редкой ] [.N вещью ] ] ] ] [.N красавицы, ] [.AP [.Adj роющейся ] [.PP [.Prep меж ] [.NP [.N коробок ] ] ] ] ] ]
+\end{center}
+\end{tiny}
+\end{frame}
+
+\begin{frame}{Грамматика составляющих -- II}
+\begin{small}
+\begin{itemize}
+    \item $S$ -- линейно упорядоченое множество слов
+    \item размеченная система составляющих $C$ -- мн-во отрезков $S$, т.\,ч.
+        \begin{itemize}
+            \item $S \in C$
+            \item если $A, B \in C$, то либо $A \subset B$, либо $B \subseteq A$, либо $A \cap B = \varnothing$
+            \item $K$ -- множество категориальных символов
+            \item каждому $c \in C$ приписан единственный $k \in K$
+        \end{itemize}
+    \item если $A \subset B$, то $B$ доминирует над $A$, $A$ -- составляющая $B$
+\end{itemize}
+\end{small}
+\end{frame}
+
+\begin{frame}{Грамматика составляющих -- III}
+Структурные отношения:\\
+\medskip
+\begin{small}
+\begin{itemize}
+    \item если $A \subset B$, то $B$ доминирует над $A$, $A$ -- составляющая $B$
+    \item если $A \subset B$ и не существует такого $C$, что $A \subset C \subset B$, \\то $A$ -- непосредственная составляющая $B$
+\end{itemize}
+\end{small}
+\end{frame}
+
+
+
+% Next -- выразительная сила синтаксического формализма
+%       иерархия Хомского
+%       Gaifman 1965
+%       неадекватность CFG естественному языку; аргументация Хомского из "Синтаксических структур"; аргументация Шибера
+%       пути построения выразительного формализма: трансформационный и нетрансформационный подход
+%       тезис Джоши (1985), mild context sensitivity
+
+
+\begin{frame}{}
+    \thispagestyle{empty}
+    \begin{center}
+        {\large Спасибо!}
+    \end{center}
+\end{frame}
+
+
+\end{document}
