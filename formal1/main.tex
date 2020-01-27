@@ -32,10 +32,24 @@
     \titlepage
 \end{frame}
 
-\begin{frame}{}
+\begin{frame}{Литература к курсу (I)}
+\textbf{Основная литература}
+\bigskip
 \begin{itemize}
-	\item Не путать модель (например, X'--теория) и аппарат моделирования (КГ--грамматики)
-	\item https://www.mccme.ru/free-books/pentus/pentus.pdf
+	\item А. Е. Пентус, М. Р. Пентус. Теория формальных языков. (Учебное пособие). 2004.
+	\item И. Л. Тимофеева. Математическая логика. (Курс лекций), 2007.
+	\item Laura Kallmeyer. Parsing Beyond Context-Free Grammars. 2010.
+	\item N. Francez, Sh. Wintner. Unification Grammars. 2011.
+	\item R. Moot, Ch. Retore. The Logic of Categorial Grammars. 2012.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Литература к курсу (II)}
+\textbf{Дополнительная литература}
+\bigskip
+\begin{itemize}
+	\item А. Ахо и др. Компиляторы. Принципы, технологии и инструментарий. М., Вильямс, 2016.
+	\item Э. Бах. Неформальные лекции по формальной семантике. 2010
 \end{itemize}
 \end{frame}
 
@@ -46,13 +60,36 @@
 \end{center}
 \end{frame}
 
+\begin{frame}{Предварительные замечания}
+Необходимо различать
+\bigskip
+\begin{itemize}
+	\item моделируемый объект (фрагмент английского языка)
+	\item модель (X'-теория)
+	\item аппарат моделирования (КС-грамматика)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Формальный язык}
+\begin{itemize}
+	\item $\Sigma$ -- конечный алфавит
+	\item $\Sigma^{*}$ -- множество строк (слов) над $\Sigma$
+	\item $L \subseteq \Sigma^{*}$ -- (формальный) язык
+\end{itemize}
+\bigskip
+Например, $\Sigma = \{a\}$, $\Sigma^{*} = \{\epsilon, a, aa, aaa, \ldots\}$, $L = a^{2n},$ где $n \in \mathbb{N}$
+\end{frame}
+
 \begin{frame}{Общая классификация}
 \begin{itemize}
+	\item регулярные, контекстно-свободные, контекстно-зависимые и рекурсивно-перечислимые языки
+    \item языки типа 3, 2, 1, 0 (иерархия Хомского)
+\end{itemize}
+\bigskip
+\begin{itemize}
     \item грамматики зависимостей и грамматики составляющих
-    \item регулярные, контекстно-свободные, контекстно-зависимые
-    \item грамматики типа 3, 2, 1, 0 
-    \item трансформационные и нетрансформационные 
-    \item лексикализованные и нелексикализованные 
+    \item трансформационные и нетрансформационные грамматики
+    \item лексикализованные и нелексикализованные грамматики
 \end{itemize}
 \end{frame}
 
