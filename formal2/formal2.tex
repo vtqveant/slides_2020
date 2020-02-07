@@ -106,6 +106,30 @@
 \end{scriptsize}
 \end{frame}
 
+\begin{frame}{Дистантные зависимости}
+Клауза без прямого дополнения
+\smallskip
+\begin{itemize}
+	\item Do you like chocolate?
+	\item $^*$Yes, I like.
+\end{itemize}
+\bigskip
+Анафорическая зависимость клаузы
+\medskip
+\begin{itemize}
+	\item That is the girl$_{i}$ [ I like \_$_i$ ].
+	\item Bob$_i$ is easy [ to find \_$_i$ ].
+\end{itemize}
+\bigskip
+Анализ гэппинга в тансформационной грамматике
+\medskip
+\begin{itemize}
+	\item Bob$_i$ is easy [ to find Bob$_i$ ]. \textit{(глубинная форма)}
+	\item Bob$_i$ is easy [ to find \_$_i$ ]. \textit{(удаление прямого дополнения с сохранением анафорической зависимости)}
+\end{itemize}
+	
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   2. Недостаточность CFG
@@ -215,7 +239,7 @@ $ababab, aabbab, abbaab, babaab, \ldots \in L_2$
 
 %%%%%%%%
 
-\begin{frame}{Shieber (1987) -- I}
+\begin{frame}{Shieber (1985) -- I}
 Пусть $L$ -- множество предложений швейцарского немецкого. Рассмотрим следующее предложение:\\ 
 \begin{scriptsize}
 \begin{exe}
@@ -238,7 +262,22 @@ $f(\_) = z$ в остальных случаях}
 \end{center}
 \end{frame}
 
-\begin{frame}{Shieber (1987) -- II}
+\begin{frame}{Shieber (1985) -- II}
+Грамматичны следующие предложения:\\ 
+\medskip
+\begin{scriptsize}
+	\begin{itemize}
+		\item \dots das mer d'chind es huus haend wele laa aastriiche
+		\item \dots das mer em Hans es huus haend wele h\"{a}lfe aastriiche
+		\item \dots das mer d'chind em Hans es huus haend wele laa h\"{a}lfe aastriiche
+		\item \dots das mer (d'chind)$^n$ (em Hans)$^m$ es huus haend wele (laa)$^n$ (h\"{a}lfe)$^m$ aastriiche
+	\end{itemize}
+\end{scriptsize}
+\medskip
+\dots позволить детям помочь Гансу позволить детям помочь Гансу позволить (чтобы дети помогли Гансу позволить детям помочь в том, чтобы Ганс позволил детям помочь ему позволить детям оказать ему помощь) \dots
+\end{frame}
+
+\begin{frame}{Shieber (1985) -- III}
 Гомоморфный образ КС-языка -- КС-язык. {\small \textit{(Пентус, теорема 11.3)}}\\
 \bigskip
 Если $L$ -- КС-язык, то $f(L)$ -- тоже КС-язык. {\small \textit{(по теореме 11.3)}}\\
